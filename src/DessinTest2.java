@@ -43,7 +43,7 @@ public class DessinTest2 {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				DessinFrame application = new DessinFrame("Devoir 2 INF1573");
+				DessinFrame application = new DessinFrame("paint drawing");
 				application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 				application.setSize(800, 600);
