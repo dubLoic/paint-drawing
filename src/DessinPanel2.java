@@ -81,17 +81,17 @@ public class DessinPanel2 extends JPanel {
 		paintComponent(getGraphics());
 	}
 
-	// EFFACE LA FIGURE SELECTIONNER
+	// EFFACE LA FIGURE SELECTIONNER =============================================================================================
 	public void clearSelected() {
 
 		for (FormGeo f : selectedFormesGeo) {
-			f.setSelected(false);
+			f.setNotSelected();
 		}
 		selectedFormesGeo.clear();
 		repaint();
 	}
 
-	// EFFACE LA FIGURE CONTENU DANS LE TABLEAU
+	// EFFACE LA FIGURE CONTENU DANS LE TABLEAU ===============================================================================
 	/** selectedFormesGeo */
 	public void deleteSelected() {
 
@@ -107,7 +107,7 @@ public class DessinPanel2 extends JPanel {
 		selectedFormesGeo.clear();
 		selectedFormesGeo.addAll(formesGeo);
 		for (FormGeo f : selectedFormesGeo) {
-			f.setSelected(true);
+			f.setSelected();
 		}
 		repaint();
 	}
@@ -215,7 +215,7 @@ public class DessinPanel2 extends JPanel {
 				add(f);
 			} else {
 				if (!selectedFormesGeo.contains(courant)) {
-					courant.setSelected(true);
+					courant.setSelected();
 					selectedFormesGeo.add(courant);
 				}
 			}
@@ -310,7 +310,7 @@ public class DessinPanel2 extends JPanel {
 	public void enregistre(ObjectOutputStream out) {
 		try {
 			for (FormGeo f : formesGeo) {
-				f.setSelected(true);
+				f.setSelected();
 				out.writeObject(f);
 
 			}

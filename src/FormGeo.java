@@ -24,11 +24,11 @@ public class FormGeo implements Serializable {
 	public static enum Type {
 		RECT, ELLIPSE
 	};
-
+	
 	// couleur qu'aura le prochain objet dessin�
 	private static Color couleurCourante = Color.BLACK;
 	protected static FormGeo.Type Type;
-	private boolean selected;
+	private FormGeoContext formContext; //FormContextGeo
 	private RectangularShape rs;
 	// champs pourla couleur de l'objet et son type
 	private Color couleur; // la couleur de l'objet
@@ -57,11 +57,15 @@ public class FormGeo implements Serializable {
 		} else if (td == Type.ELLIPSE) {
 			this.rs = new Ellipse2D.Double(x, y, w, h);
 		}
+		
+		formContext = new FormGeoContext(); //Init selected to false
 
 	}
 
 	public FormGeo(Type td) {
 		this(td, 0, 0, 0, 0);
+		
+		formContext = new FormGeoContext(); //Init selected to false
 	}
 
 	public static void setCouleurCourante(Color c) {
@@ -77,9 +81,14 @@ public class FormGeo implements Serializable {
 		g.fill(rs);
 
 	}
-
-	public void setSelected(boolean b) {
-		selected = b;
+	
+	//SetSelectedState
+	public void setSelected() {
+		formContext.setState(new Selected());
+	}
+	//SetUnselectedState
+	public void setNotSelected() {
+		formContext.setState(new NotSelected());
 	}
 
 	public void setCouleur(Color c) {
@@ -91,7 +100,7 @@ public class FormGeo implements Serializable {
 	}
 
 	public boolean isSelected() {
-		return selected;
+	 	return formContext.select();
 	}
 
 	public boolean contains(Point2D p) {
